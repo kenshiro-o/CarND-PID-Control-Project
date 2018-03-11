@@ -72,10 +72,6 @@ double PID::TotalError() {
 }
 
 void PID::Twiddle(){
-    // if(count == min_cycles){
-    //     best_error = TotalError();
-    //     ctes.clear();
-    // }
     cout << "[TWIDDLE] [ctes-size=" << ctes.size() 
          << ", phase=" << phase 
          << ", current-index=" << current_P_index
