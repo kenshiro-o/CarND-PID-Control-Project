@@ -1,6 +1,10 @@
 #ifndef PID_H
 #define PID_H
 
+#include <vector>
+using namespace std;
+
+
 class PID {
 public:
   /*
@@ -9,13 +13,32 @@ public:
   double p_error;
   double i_error;
   double d_error;
+  double best_error;
 
   /*
   * Coefficients
   */ 
-  double Kp;
-  double Ki;
-  double Kd;
+  // Represents [P,I,D]
+  vector<double> P;
+  vector<double> dP;
+
+  /*
+  * cte related variables
+  */ 
+  double current_cte;
+  double previous_cte;
+  vector<double> ctes;
+
+  /*
+  * Counts, etc
+  */
+  int count;
+  int min_cycles;
+  int reset_interval;
+  int current_P_index;
+  int phase;
+  double current_steer;
+
 
   /*
   * Constructor
@@ -41,6 +64,20 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+  /*
+   * Performs the twiddle algorithm
+   */ 
+  void Twiddle();
+
+private:
+   /*
+   * Computes and returns the steering angle
+   */ 
+  double CalculateSteer(double kp, double ki, double kd);
+
+
+
 };
 
 #endif /* PID_H */
