@@ -32,8 +32,8 @@ public:
   /*
   * Counts, etc
   */
-  int count;
-  int min_cycles;
+  unsigned int count;
+  unsigned int min_cycles;
   int reset_interval;
   int current_P_index;
   int phase;
